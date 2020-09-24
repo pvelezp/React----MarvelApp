@@ -1,0 +1,49 @@
+.comics__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.comics >h2 {
+    padding: 1em;
+    font-weight: 600;
+}
+.comics__filters {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 2em;
+}
+.comics__filter {
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    background-color: rgb(29, 28, 28);
+    width: 26%;
+}
+
+.comics__filter > form > input {
+    border: none;
+    background-color: rgb(29, 28, 28);
+    outline-width: 0;
+    border-radius: 20px;
+    padding:0.5em;
+    width:80%
+}
+.comics__filter > form > button {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .comics__filters {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+ 
+        height: 11em;
+    }
+
+    .comics__filter {
+        border: 1px solid lightgray;
+        border-radius: 20px;
+        background-color: rgb(29, 28, 28);
+        width: 70%;
+    }
+}

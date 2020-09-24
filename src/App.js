@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+
 import './App.css';
+import MainPage from './MainPage';
+import NavBar from './NavBar';
+import Characters from './Characters';
+import Comics from './Comics';
+import Stories from './Stories';
+import CharacterDetails from './CharacterDetails';
+import Favorites from './Favorites';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App__container">
+      <NavBar />
+      <Switch>
+      <Route exact path='/' component={MainPage} />
+      <Route path='/character/:characterId' component={CharacterDetails} />
+      <Route path='/characters' component={Characters} />
+      <Route  path='/comics' component={Comics} />
+      <Route  path='/stories' component={Stories} />
+     <Route path='/favorites' component={Favorites} /> 
+      </Switch>
+      </div>
+    </Router>
   );
 }
 

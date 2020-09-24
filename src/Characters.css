@@ -1,0 +1,18 @@
+.characters {
+    transition: 450ms -webkit-transform;
+    transition: 450ms transform;
+    transition: 450ms transform, 450ms -webkit-transform;
+    font-size: 0;
+    white-space: nowrap;
+    margin: 70px 0px;
+    padding-bottom: 10px;
+    overflow-y: hidden;
+}
+
+.characters__title {
+    padding: 0.9em;
+}
+
+.characters__orderSelect {
+    padding: 0.9em;
+}

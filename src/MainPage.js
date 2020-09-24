@@ -1,0 +1,114 @@
+import React,{useState, useEffect} from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, {Navigation,Pagination,EffectFade, EffectCoverflow ,Thumbs, Virtual} from 'swiper'
+import 'swiper/swiper-bundle.css'
+import './MainPage.css'
+import { useHistory } from 'react-router-dom';
+
+SwiperCore.use([Navigation, Pagination, Thumbs])
+SwiperCore.use([Virtual]);
+SwiperCore.use([EffectFade]);
+SwiperCore.use([EffectCoverflow]);
+
+const MainPage = () => {
+    const history =  useHistory()
+const [thumbsSwiper, setThumbsSwiper] = useState(null)
+    const PUBLIC_KEY = '1f2c294cbbf04d4d3f91953ccd41356b'
+    const HASH = '18d91b1be3513b3b44314046810a850c'
+   
+    const [characters, setCharacters] = useState([])
+    const [count, setCount]= useState(40)
+    const [offset, setOffset] = useState(Math.random()*100)
+    const [order, setOrder]= useState('name')
+   console.log(characters)
+  
+    const MARVEL_CHARACTER = `https://gateway.marvel.com:443/v1/public/characters?orderBy=${order}&limit=${count}&offset=${offset}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`
+
+    useEffect(()=> {
+
+        fetch(MARVEL_CHARACTER)
+        .then(res => res.json())
+        .then(res => setCharacters([...res.data.results]))
+        setOffset(offset => offset + count +1)
+    },[ ])
+
+    const MARVEL_COMICS = `https://gateway.marvel.com:443/v1/public/comics?&limit=40&ts=1&offset=${offset}&&apikey=${PUBLIC_KEY}&hash=${HASH}`
+
+    const [comics, setComics] = useState([])
+
+
+    useEffect(()=> {
+        fetch(MARVEL_COMICS)
+        .then(res => res.json())
+        .then(res => setComics(res.data.results))
+    },[])
+
+
+    return (
+        <div>
+
+        <div className="mainPage__list">
+            
+        <Swiper
+        
+        id='main'
+        navigation
+      
+        thumbs={{swiper: thumbsSwiper}}
+        spaceBetween={1}
+        slidesPerView={1}
+    
+   
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+
+        {characters?.filter(character => !character?.thumbnail?.path.includes('image_not_available') && 
+       !character?.thumbnail?.extension.includes('gif')).map(character => (
+            <SwiperSlide
+            key={character.id}
+            >
+
+<img className="Banner__mainPage"
+             src={`${character?.thumbnail?.path}.${character?.thumbnail?.extension}`} alt={character?.name}/>
+            </SwiperSlide>
+        ))}
+      
+      
+    </Swiper>
+
+    <div className="mainPage__info">
+        <div className="mainPage__infoText">
+        <h1>Welcome to Marvel's  Universe</h1>
+        <button className="mainPage__button">
+            See characters
+        </button>
+        </div>
+    </div>
+        </div>
+
+            
+        <div className="thumbnails__mainPage">
+        <h2>Discover your favorite comics!</h2>
+            <Swiper 
+                 
+            effect="coverflow"
+            id="thumbs" spaceBetween={5} slidesPerView={3} onSwiper={setThumbsSwiper}>
+            {comics?.filter(comic => comic.images.length).map(comic => (
+                <SwiperSlide
+                key={comic.id}
+                className="thumbnails__slide"
+                >
+                     <img
+                     onClick={()=> history.push('/comics')}
+                     className="thumbnails__image"
+                     src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.name}/>
+                </SwiperSlide>
+            ))}
+            </Swiper>
+        </div>
+        </div>
+    )
+}
+
+export default MainPage

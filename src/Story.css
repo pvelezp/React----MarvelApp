@@ -1,0 +1,19 @@
+.story {
+    
+    margin: 0 auto;
+    box-shadow: 1px 0 4px 3px rgba(0,0,0,0.2);
+    border-radius: 4px;
+   
+    background-color: gray;
+    padding: 2rem;
+    width: 80%;
+    
+}
+
+
+
+.story__comics {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
