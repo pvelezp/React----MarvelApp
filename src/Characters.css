@@ -9,11 +9,18 @@
     padding-bottom: 10px;
     overflow-y: hidden;
 }
-
+.characters__list {
+    margin-top: 5rem;
+}
 .characters__title {
     padding-left: 3rem;
     margin-bottom: 3rem;
 
+}
+
+.characters__filters {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .characters__orderSelect {
@@ -32,10 +39,48 @@ align-items: center;
     color: black
 }
 
+.charactersComics__filter {
+    background-color: rgb(51, 47, 47);
+    width:250px;
+    border-radius: 20px;
+    padding: 0.5rem;
+    
+}
+
 .orderBy__option {
     color: black !important;
 }
 
 .characters__input {
-    background-color: gray;
+width: 70%;
+height: 20px;
+border: none;
+outline-width: 0;
+color: whitesmoke !important;
+}
+
+@media screen and (max-width: 600px) {
+    .characters__select {
+        background-color: silver !important;
+        margin-left: 1rem;
+        padding: 0 0.8rem;
+        border-radius: 5px;
+        color: black;
+        margin-bottom: 2rem;
+    }  
+
+    .characters__orderSelect {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .characters__filters {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+       
+        height: 160px;
+    }
 }

@@ -50,23 +50,19 @@ const Character = ({character}) => {
             
             className="character__details">
             <h2
-            onClick={()=> history.push(`/character/${character.id}`)}
-            >{truncate(character.name,30)}</h2>
+            onClick={()=> history.push(`/character/${character?.id}`)}
+            >{truncate(character?.name,30)}</h2>
         
             <div className="character__favoriteIcon">
         <IconButton
-            onClick={addToFavorite}
+        onClick={addToFavorite}
            
             >
-              { isFavorite || favorites.find(favorite => favorite.id === character.id )  ? <FavoriteIcon />: <FavoriteBorderIcon />}
+              { isFavorite || favorites?.find(favorite => favorite?.id === character.id )  ? <FavoriteIcon />: <FavoriteBorderIcon />}
             </IconButton>
         </div>
 
-        <div className="character__button">
-        <button >
-            See more
-        </button>
-        </div>
+        
             </div>
 
  

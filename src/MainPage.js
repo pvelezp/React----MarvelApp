@@ -17,9 +17,9 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
     const HASH = '18d91b1be3513b3b44314046810a850c'
    
     const [characters, setCharacters] = useState([])
-    const [count, setCount]= useState(40)
+    const [count]= useState(40)
     const [offset, setOffset] = useState(Math.random()*100)
-    const [order, setOrder]= useState('name')
+    const [order]= useState('name')
 
   
     const MARVEL_CHARACTER = `https://gateway.marvel.com:443/v1/public/characters?orderBy=${order}&limit=${count}&offset=${offset}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`
@@ -40,7 +40,7 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
     useEffect(()=> {
         fetch(MARVEL_COMICS)
         .then(res => res.json())
-        .then(res => setComics(res.data.results))
+        .then(res => setComics(res?.data?.results))
     },[])
 
 
@@ -49,19 +49,12 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
         <div className="mainPage__list">
             
-        <Swiper
-        
+        <Swiper    
         id='main'
-        
-      
         thumbs={{swiper: thumbsSwiper}}
         spaceBetween={1}
         slidesPerView={1}
-    
-   
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
+         >
 
         {characters?.filter(character => !character?.thumbnail?.path.includes('image_not_available') && 
        !character?.thumbnail?.extension.includes('gif')).map(character => (
@@ -79,9 +72,11 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
     <div className="mainPage__info">
         <div className="mainPage__infoText">
-        <h1>Welcome to Marvel's  Universe</h1>
+        <h1>This is Marvel's world</h1>
         <h4>The place where all Marvel lives</h4>
-        <button className="mainPage__button">
+        <button 
+        onClick={()=>history.push('/characters')}
+        className="mainPage__button">
             See characters
         </button>
         </div>
@@ -92,10 +87,14 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
         <div className="thumbnails__mainPage">
         <h2>Discover your favorite comics!</h2>
             <Swiper 
-                 
+                  grabCursor= {true}
             effect="coverflow"
-            id="thumbs" spaceBetween={5} slidesPerView={3} onSwiper={setThumbsSwiper}>
-            {comics?.filter(comic => comic.images.length).map(comic => (
+            id="thumbs"
+             spaceBetween={5}
+              slidesPerView={3}
+              draggable={true}
+               onSwiper={setThumbsSwiper}>
+            {comics?.filter(comic => comic?.images?.length).filter(comic => !comic.thumbnail.path.includes('image_not_available')).map(comic => (
                 <SwiperSlide
                 key={comic.id}
                 className="thumbnails__slide"

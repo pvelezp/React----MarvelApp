@@ -24,7 +24,7 @@ const Favorites = () => {
            <div className="favorites__list">
            {favorites?.map(favorite => (
                 <Favorite
-                key={favorite.id}
+                key={favorite?.id}
                 favorite={favorite}
                 />
             ))}

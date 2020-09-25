@@ -16,8 +16,6 @@ const history = useHistory()
    const [comicDetails, setComicDetails] = useState([])
    const [comicStories, setComicStories] =useState([])
 
-   console.log(comicDetails)
-
    // bring general comic details
    useEffect(() => {
        const fetchComic = async () => {
@@ -52,7 +50,9 @@ const stories = comicStories?.map(story => story.title ).join(',  ')
      <div className="comicDetailsBody">
      <div className="comicDetailsSection1">
            
-           <img src={`${comicDetails?.thumbnail?.path}.${comicDetails?.thumbnail?.extension}`} alt=""/>
+           <img
+           className="comicDetails__img "
+           src={`${comicDetails?.thumbnail?.path}.${comicDetails?.thumbnail?.extension}`} alt=""/>
           </div>
 
            <div className="comicDetailsSection2">

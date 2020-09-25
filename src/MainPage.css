@@ -2,16 +2,20 @@
     width:320px;
     height: 500px;
     object-fit: cover;
- box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+ box-shadow: 0 15px 30px rgba(211, 158, 158, 0.8);
  margin-bottom: 50px;
  margin: 0 50px;
 }
 .thumbnails__slide {
     margin-top: 1em;
 }
+
+.thumbnails__mainPage {
+    background-color: rgba(0, 0, 0, 0.8);
+}
 .thumbnails__mainPage > h2{
    
-  margin: 1em;
+  margin: 1rem;
 }
 
 
@@ -31,7 +35,8 @@
     left: 0;
     right: 0;
     top:0;
-    z-index: 10;
+    z-index: 101;
+   
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
 
@@ -39,6 +44,12 @@
     position: absolute;
     bottom:3rem;
     left: 2rem
+}
+
+.mainPage__infoText >h4 {
+    font-size: 1.5rem;
+    margin:0.8rem 0;
+    margin-bottom: 1.4rem;
 }
 
 .mainPage__button {
@@ -53,9 +64,10 @@ outline-width: 0;
 
 .mainPage__infoText > h1 {
  font-weight: 900;  
- font-size: 4em; 
+ font-size: 3.3rem; 
  font-family: sans-serif  !important;
 }
+
 
 .mainPage__button:hover {
     color: #255784;
@@ -73,13 +85,22 @@ outline-width: 0;
      margin-bottom: 50px;
      margin-right: 20px;
     }
-    .thumbnails__slide {
-        margin-top: 80px;
-    }
+   
     .Banner__mainPage {
         width: 100vw;
         height: 55vh;
        object-fit: cover;
     }
+
+    .mainPage__infoText > h1 {
+        font-weight: 900;  
+        font-size: 2rem; 
+        font-family: sans-serif  !important;
+       }
+
+       .mainPage__infoText > h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+       }
      
 }

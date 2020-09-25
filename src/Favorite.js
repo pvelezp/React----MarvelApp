@@ -8,7 +8,7 @@ import './Favorite.css'
 
 
 const Favorite = ({favorite}) => {
-console.log(favorite)
+
     const  {dispatch} = useContext(FavoriteContext)
     const [isFavorite] = useState(false)
     const history = useHistory()
@@ -20,13 +20,14 @@ console.log(favorite)
     }
 
     const path = favorite?.hasOwnProperty('characters')  ? 'comic': 'character'
+    const name = favorite?.hasOwnProperty('characters')  ? favorite?.title : favorite?.name
 
     return (
-        <div className="favorite">
+        <div className="favorite ">
             <img
-         onClick={() => history.push(`/${path}/${favorite.id}`)}
+         onClick={() => history.push(`/${path}/${favorite?.id}`)}
             src={`${favorite?.thumbnail?.path}.${favorite?.thumbnail?.extension}`} alt={favorite?.name}/>
-            <h2>{favorite.name}</h2>
+            <h2>{name}</h2>
             <IconButton
             onClick={unFavorite}
             >

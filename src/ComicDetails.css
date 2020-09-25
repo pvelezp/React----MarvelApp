@@ -11,9 +11,11 @@
     padding: 2rem;
     align-items: center;
     justify-content:space-evenly;
+    background-color: #EC1D24;
 }
 .comic__Stories{
     margin-top: 1.5rem;
+    
 }
 
 .comicDetailsSection2 {
@@ -26,18 +28,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+ 
 }
 
-.comicDetailsSection1 > img {
-    width: 300px;
+
+
+.comicDetailsSection1 {
+    position: relative;
+    -webkit-perspective: 603px;
+    perspective: 603px;
+}
+
+.comicDetails__img {
+    height: 250px;
     object-fit: contain;
-    box-shadow:
+    -webkit-transform: rotateX(0deg) rotateY(-35deg);
+transform: rotateX(0deg) rotateY(-35deg);
+box-shadow:
   0 2.8px 2.2px rgba(20, 20, 20, 0.034),
   0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-  0 12.5px 10px rgba(0, 0, 0, 0.06),
-  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 12.5px 10px rgba(0, 0, 0, 0.16),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.22),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.4),
   0 100px 80px rgba(0, 0, 0, 0.12)
 }
 

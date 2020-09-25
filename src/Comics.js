@@ -4,7 +4,7 @@ import './Comics.css'
 import SearchIcon from '@material-ui/icons/Search'
 import axios from 'axios'
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { MenuItem, Select } from '@material-ui/core';
+import { CircularProgress, MenuItem, Select } from '@material-ui/core';
 
 const Comics = () => {
     const PUBLIC_KEY = '1f2c294cbbf04d4d3f91953ccd41356b'
@@ -12,7 +12,7 @@ const Comics = () => {
     const [order, setOrder]= useState('issueNumber')
     
     const [offset, setOffset] = useState(0)
-    const [count, setCount]= useState(30)
+    const [count]= useState(30)
     const MARVEL_CHARACTER = `https://gateway.marvel.com:443/v1/public/comics?orderBy=${order}&limit=${count}&offset=${offset}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`
 
 
@@ -21,15 +21,16 @@ const Comics = () => {
     const [titleText, setTitleText]= useState('')
     const [filteredData, setFilteredData] = useState([])
     const [issue, setIssue] = useState('')
-   
+
     const [format, setFormat] =useState('')
 
    
     useEffect(()=> {
         fetch(MARVEL_CHARACTER)
         .then(res => res.json())
-        .then(res =>setComics(res.data.results))
-    },[ ,order])
+        .then(res =>setComics(res?.data.results))
+        setOffset(offset => offset + count +1)
+    },[ ,order,count])
 
     const infiniteData = async () => {
         setOffset(offset => offset + count +1)
@@ -82,43 +83,50 @@ const Comics = () => {
 
       
             <div className="comics__orderSelect">
-                <h5>Order by:</h5>
+               <div className="comics__orderName">
+               <h5>Order by:</h5>
             <Select
             className="comics__select"
              value={order}
             onChange={e => setOrder(e.target.value)}
             >
-                <MenuItem className="orderBy__option" value='issueNumber'>Ascendant</MenuItem>
-                <MenuItem  className="orderBy__option" value='-issueNumber'>Descendant</MenuItem>
+                <MenuItem className="orderBy__option" value='issueNumber'>asc</MenuItem>
+                <MenuItem  className="orderBy__option" value='-issueNumber'>desc</MenuItem>
             </Select>
+
+               </div>
+            
+           <div className="comics__orderFormat">
+           <h5>Search format:</h5>
+                <Select
+                className="comics__formatSelect"
+                value={format}
+                onChange={searchByFormat}
+                >
+                    <MenuItem  className="orderBy__option"   value='comic'>Comic</MenuItem>
+                    <MenuItem  className="orderBy__option" value='magazine'>Magazine</MenuItem> 
+                    <MenuItem  className="orderBy__option" value='trade paperback'>Trade paperback</MenuItem>
+             <MenuItem  className="orderBy__option" value='hardcover'>Hardcover</MenuItem>
+                    <MenuItem  className="orderBy__option" value='digest'>Digest</MenuItem>
+                    <MenuItem  className="orderBy__option" value='digital comic'>Digital Comic</MenuItem>
+                    <MenuItem className="orderBy__option"  value='infinite comic'>Infinite Comic</MenuItem> 
+
+                </Select>
+           </div>
 
             </div>
          
            
             <div className="comics__filters">
                
-                   <h4>Search by format:</h4>
-                <Select
-                value={format}
-                onChange={searchByFormat}
-                >
-                    <MenuItem value='comic'>Comic</MenuItem>
-                    <MenuItem value='magazine'>Magazine</MenuItem> 
-                    <MenuItem value='trade paperback'>Trade paperback</MenuItem>
-             <MenuItem value='hardcover'>Hardcover</MenuItem>
-                    <MenuItem value='digest'>Digest</MenuItem>
-                    <MenuItem value='digital comic'>Digital Comic</MenuItem>
-                    <MenuItem value='infinite comic'>Infinite Comic</MenuItem> 
-
-                </Select>
               
                 <div className="comics__filter">
                 <form onSubmit={searchByIssueNumber}>
                 <SearchIcon />
                     <input 
                     value={issue}
-                    onChange={e => setIssue(e.target.value)}
-                    type="number" placeholder="Find by Issue Number"/>
+                    onChange={e => setIssue(e.target.value.replace(/\D/,''))}
+                    type="text" placeholder="Find by Issue Number"/>
                     <button type="submit">Buscar</button>
                 </form>
                 </div>
@@ -133,11 +141,16 @@ const Comics = () => {
                 </form>
                 </div>
             </div>
-
+       
         <div className="comics__list">
+
+        <div className="comics__formatTitle">
+           {format ? <h5>Comics ordered by {format} format</h5>: null }
+           </div>
+
         {
-         filteredData.length !== 0 ? (
-             filteredData.map(comic => (
+         filteredData?.length  ? (
+             filteredData?.map(comic => (
                 <Comic
                 key={comic.id}
                 comic={comic}
@@ -149,10 +162,10 @@ const Comics = () => {
                (
                 <InfiniteScroll
                 className="characters__list row"
-                dataLength={comics.length}
+                dataLength={comics?.length}
                 next={infiniteData}
                 hasMore={true}
-                loader={<h4>Loading...</h4>}
+                loader={<div style={{ width:'100vw', display:'flex', justifyContent:'center'}}><CircularProgress /></div>}
                 endMessage={
                     <p style={{ textAlign: 'center' }}>
                       <b>Yay! You have seen it all</b>

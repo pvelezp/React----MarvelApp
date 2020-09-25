@@ -12,7 +12,7 @@ SwiperCore.use([EffectFade]);
 SwiperCore.use([EffectCoverflow]);
 
 const CharacterDetails = ({history}) => {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null)
+    const [ setThumbsSwiper] = useState(null)
     const {characterId} = useParams()
     const PUBLIC_KEY = '1f2c294cbbf04d4d3f91953ccd41356b'
     const HASH = '18d91b1be3513b3b44314046810a850c'
@@ -67,7 +67,8 @@ const stories_title = characterStories?.map(story => story.title ).filter(story 
             </div>
             <div className="character__Card">
             <img
-            className="card-img-top img-thumbnail character__img"
+   
+            className="card-img-top img-thumbnail character__img "
             src={`${character?.thumbnail.path}.${character?.thumbnail?.extension}`} alt={character?.name}/>
 
             
@@ -85,7 +86,7 @@ const stories_title = characterStories?.map(story => story.title ).filter(story 
 
                 </div>
                 <Swiper
-                // style={{display:'flex'}}
+              
                 effect="coverflow"
                 grabCursor= {true}
                 centeredSlides={true}
@@ -100,6 +101,8 @@ const stories_title = characterStories?.map(story => story.title ).filter(story 
                         style={{height:'260px', width:'120px'}}
                         key={comic.id}>
                             <img 
+                           
+                            onClick={() => history.push(`/comic/${comic.id}`)}
                             style={{height: '180px', width: '120px' ,margin:'0 1rem'}}
                             src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                              alt={comic.title}/>

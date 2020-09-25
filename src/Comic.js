@@ -47,7 +47,7 @@ const Comic = ({comic}) => {
     <button
     className="comic__button"
     onClick={()=> history.push(`/comic/${comic.id}`)}
-    >Ver comic</button>
+    >See comic</button>
     <div className="comic__favoriteIcon">
   <IconButton
             onClick={addToFavorite}
