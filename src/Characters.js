@@ -2,6 +2,9 @@ import React,{useState,useEffect} from 'react'
 import Character from './Character'
 import './Characters.css'
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Input, MenuItem, Select } from '@material-ui/core';
+import SearchIcon  from '@material-ui/icons/Search';
+import axios from 'axios'
 
 const Characters = () => {
 
@@ -9,10 +12,12 @@ const Characters = () => {
     const HASH = '18d91b1be3513b3b44314046810a850c'
    
     const [characters, setCharacters] = useState([])
-    const [count, setCount]= useState(8)
+    const [count, setCount]= useState(30)
     const [offset, setOffset] = useState(0)
     const [order, setOrder]= useState('name')
-   
+   const [characterName, setCharacterName]= useState('')
+   const [characterComics, setCharacterComics] = useState('')
+   const [characterStories, setCharacterStories] = useState('')
   
     const MARVEL_CHARACTER = `https://gateway.marvel.com:443/v1/public/characters?orderBy=${order}&limit=${count}&offset=${offset}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`
 
@@ -31,27 +36,94 @@ const Characters = () => {
         .then(res => setCharacters([...characters,...res?.data?.results]))
     }
 
+    // filter by name
+const searchCharacterbyName = e => {
+    e.preventDefault()
+    const filterData = async () => {
+        await axios.get(`https://gateway.marvel.com:443/v1/public/characters?name=${characterName}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`)
+        .then(res => setCharacters(res.data.data.results))
+    }
+
+    filterData()
+}
+//Ultimate X-Men (2000) #40
+// filter by COmics
+const searchCharacterbyComics = e => {
+     e.preventDefault()
+     const filterData = async () => {
+ await axios.get(`https://gateway.marvel.com:443/v1/public/characters?comics=${characterComics}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`)
+ .then(res => console.log(res.data.data.results))
+     }
+    filterData()
+    
+}
+
+//filter by Stories
+const searchCharacterbyStories= e => {
+    e.preventDefault()
+     const filterData = async () => {
+ await axios.get(`https://gateway.marvel.com:443/v1/public/characters?stories=${characterStories}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`)
+ .then(res => console.log(res.data.data.results))
+     }
+    filterData()
+}
+
 
     return (
         <div className="characters">
-              <div className="characters__selectOrder">
-              <select value={order}
-            onChange={e => setOrder(e.target.value)}
-            >
-
-                <option >Order by name</option>
-                <option value='name'>Ascendant</option>
-                <option value='-name'>Descendant</option>
-            </select>
-              </div>
+            
             <div className="characters__title">
             <h2>Characters</h2> 
-            
             </div>
+            <div className="comics__filters">
+                <div className="comics__filter">
+                   
+                <form onSubmit={searchCharacterbyName}>
+                    <SearchIcon />
+                    <Input
+                    className="characters__input"
+                    value={characterName}
+                    onChange={e => setCharacterName(e.target.value)}
+                    type="text" placeholder="Find by Name"/>
+                    <button type="submit">Buscar</button>
+                </form>
+                </div>
+                <div className="comics__filter">
+                <form onSubmit={searchCharacterbyComics}>
+                <SearchIcon />
+                    <Input
+                    className="characters__input"
+                    value={characterComics}
+                    onChange={e => setCharacterComics(e.target.value)}
+                    type="number" placeholder="Find by comic id"/>
+                    <button type="submit">Buscar</button>
+                </form>
+                </div>
+                <div className="comics__filter">
+                <form onSubmit={searchCharacterbyStories}>
+                <SearchIcon />
+                    <Input
+                    className="characters__input"
+                    value={characterStories}
+                    onChange={e => setCharacterStories(e.target.value)}
+                    type="number" placeholder="Find by story id"/>
+                    <button type="submit">Buscar</button>
+                </form>
+                </div>
+            </div>
+             
+           
 
             <div className="characters__orderSelect">
-                
-              
+                <h5>Order by:</h5>
+            <Select
+            className="characters__select"
+             value={order}
+            onChange={e => setOrder(e.target.value)}
+            >
+                <MenuItem className="orderBy__option" value='name'>Ascendant</MenuItem>
+                <MenuItem  className="orderBy__option" value='-name'>Descendant</MenuItem>
+            </Select>
 
             </div>
 

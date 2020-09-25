@@ -13,7 +13,7 @@ const Character = ({character}) => {
   const [isFavorite, setIsFavorite] = useState(false)
     const history = useHistory()
    
-    console.log(character)
+
     function truncate (str, n) {
         return str?.length > n ? str.substr(0, n-1) + "..." : str;
     }
@@ -39,14 +39,20 @@ const Character = ({character}) => {
 
     return (
         <div
-        onClick={()=> history.push(`/character/${character.id}`)}
+        
         className="character col-12 col-sm-6 col-md-4 col-lg-3 ">
             <img
-           
+            className="character__image"
+            
             src={`${character?.thumbnail?.path}.${character?.thumbnail?.extension}`} alt={character?.name}/>
 
-            <div className="character__details">
-            <h2>{truncate(character.name,30)}</h2>
+            <div 
+            
+            className="character__details">
+            <h2
+            onClick={()=> history.push(`/character/${character.id}`)}
+            >{truncate(character.name,30)}</h2>
+        
             <div className="character__favoriteIcon">
         <IconButton
             onClick={addToFavorite}
@@ -54,6 +60,12 @@ const Character = ({character}) => {
             >
               { isFavorite || favorites.find(favorite => favorite.id === character.id )  ? <FavoriteIcon />: <FavoriteBorderIcon />}
             </IconButton>
+        </div>
+
+        <div className="character__button">
+        <button >
+            See more
+        </button>
         </div>
             </div>
 

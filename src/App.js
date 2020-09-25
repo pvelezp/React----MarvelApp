@@ -9,6 +9,7 @@ import Comics from './Comics';
 import Stories from './Stories';
 import CharacterDetails from './CharacterDetails';
 import Favorites from './Favorites';
+import ComicDetails from './ComicDetails';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route exact path='/' component={MainPage} />
       <Route path='/character/:characterId' component={CharacterDetails} />
       <Route path='/characters' component={Characters} />
+      <Route  path='/comic/:comicId' component={ComicDetails} />
       <Route  path='/comics' component={Comics} />
       <Route  path='/stories' component={Stories} />
      <Route path='/favorites' component={Favorites} /> 

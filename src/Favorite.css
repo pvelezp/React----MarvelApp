@@ -22,4 +22,5 @@
 .favorites__backIcon {
     text-align: center;
     margin: 1.4rem 0;
+    cursor: pointer;
     }

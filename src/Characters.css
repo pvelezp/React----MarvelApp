@@ -1,18 +1,41 @@
 .characters {
+    margin-top: 2.5rem;
     transition: 450ms -webkit-transform;
     transition: 450ms transform;
     transition: 450ms transform, 450ms -webkit-transform;
     font-size: 0;
     white-space: nowrap;
-    margin: 70px 0px;
+
     padding-bottom: 10px;
     overflow-y: hidden;
 }
 
 .characters__title {
-    padding: 0.9em;
+    padding-left: 3rem;
+    margin-bottom: 3rem;
+
 }
 
 .characters__orderSelect {
-    padding: 0.9em;
+   
+   justify-content: center;
+   display: flex;
+   margin-bottom: 2.5rem;
+align-items: center;
+}
+
+.characters__select {
+    background-color: silver !important;
+    margin-left: 1rem;
+    padding: 0 0.8rem;
+    border-radius: 5px;
+    color: black
+}
+
+.orderBy__option {
+    color: black !important;
+}
+
+.characters__input {
+    background-color: gray;
 }

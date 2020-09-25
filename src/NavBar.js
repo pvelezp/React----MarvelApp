@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { IconButton } from '@material-ui/core';
 import{useHistory }from 'react-router-dom'
 
@@ -18,7 +18,7 @@ const NavBar = () => {
             >
             <h1
             className="navbar__brandTitle"
-            >Marvel Universe</h1>
+            >Marvel <strong>Universe</strong>   </h1>
             </Link>
             
            <div className="navbar__favoritesIcon">
@@ -26,7 +26,7 @@ const NavBar = () => {
            
            onClick={() => history.push('/favorites')}
            >
-           <FavoriteBorderIcon
+           <FavoriteIcon
            className="navbar__favoritesButton"
            />
            </IconButton>
@@ -34,25 +34,29 @@ const NavBar = () => {
 
           </div>
             <div className="navbar-collapse">
-            <div className="navbar-nav ">
-                <NavLink
+                <ul className="navbar-nav  ">
+                    <li className="nav-item pr-5 ml-5">
+                    <NavLink
                 activeClassName="active"
                 className="nav-item nav-link "
               
                 to='/characters'>Characters
                 </NavLink>
-
+                    </li >
+                    <li className="nav-item pr-5 ml-5">
                 <NavLink
                  activeClassName="active"
                  className="nav-item nav-link"
                 to='/comics'>Comics
                 </NavLink>
-
+                    </li>
+                    <li className="nav-item pr-5 ml-5">
                 <NavLink 
                  activeClassName="active"
                  className="nav-item nav-link"
                 to='/stories'>Stories</NavLink>
-            </div>
+                    </li>
+                </ul>
             </div>
         </nav>
     )

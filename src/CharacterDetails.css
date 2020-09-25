@@ -18,6 +18,7 @@
 .characterDetail__backIcon {
 text-align: center;
 margin: 1.4rem 0;
+cursor: pointer;
 }
 .character__CardDescription {
     max-width: 30%;
@@ -27,15 +28,17 @@ margin: 1.4rem 0;
 }
 
 .character__comicsTitle {
-    padding:  0 1.5rem;
+    padding: 3rem 4rem;
     padding-bottom: 1rem;
 }
 
+
 .character__storiesTitle {
-    padding: 1.5rem;
+    padding: 3rem 4rem;
+    padding-bottom: 1rem;
 }
 .character__storiesRow {
-    padding:  0 2rem;
+    padding:  0 4rem;
     padding-bottom: 4rem;
 }
 @media screen and (max-width: 600px) {

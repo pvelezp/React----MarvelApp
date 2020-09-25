@@ -9,15 +9,17 @@ const Story = ({story}) => {
     const MARVEL_CHARACTER = `${RESOURCE_URI}?ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`
 
     const [comics, setComics] = useState([])
- console.log(comics)
+
     useEffect(()=> {
         fetch(MARVEL_CHARACTER)
         .then(res => res.json())
         .then(res => setComics(res.data.results))
+         // eslint-disable-next-line no-console console.log('eslint will ignore the no-console on this line of code'); 
+
     },[])
 
 
-  //  console.log(story)
+
     return (
         <div className="story">
       

@@ -20,7 +20,7 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
     const [count, setCount]= useState(40)
     const [offset, setOffset] = useState(Math.random()*100)
     const [order, setOrder]= useState('name')
-   console.log(characters)
+
   
     const MARVEL_CHARACTER = `https://gateway.marvel.com:443/v1/public/characters?orderBy=${order}&limit=${count}&offset=${offset}&ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`
 
@@ -52,7 +52,7 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
         <Swiper
         
         id='main'
-        navigation
+        
       
         thumbs={{swiper: thumbsSwiper}}
         spaceBetween={1}
@@ -80,6 +80,7 @@ const [thumbsSwiper, setThumbsSwiper] = useState(null)
     <div className="mainPage__info">
         <div className="mainPage__infoText">
         <h1>Welcome to Marvel's  Universe</h1>
+        <h4>The place where all Marvel lives</h4>
         <button className="mainPage__button">
             See characters
         </button>

@@ -21,8 +21,7 @@ const CharacterDetails = ({history}) => {
     const [character, setCharacter] = useState(null)
     const [characterComics, setCharacterComics] = useState([])
     const [characterStories, setCharacterStories] = useState([])
-  console.log(characterStories)
-
+  
   function truncate (str, n) {
     return str?.length > n ? str.substr(0, n-1) + "..." : str;
 }

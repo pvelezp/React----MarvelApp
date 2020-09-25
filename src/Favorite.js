@@ -8,9 +8,9 @@ import './Favorite.css'
 
 
 const Favorite = ({favorite}) => {
-
+console.log(favorite)
     const  {dispatch} = useContext(FavoriteContext)
-    const [isFavorite, setIsFavorite] = useState(false)
+    const [isFavorite] = useState(false)
     const history = useHistory()
     const unFavorite = () => {
         dispatch({
@@ -19,10 +19,12 @@ const Favorite = ({favorite}) => {
         })
     }
 
+    const path = favorite?.hasOwnProperty('characters')  ? 'comic': 'character'
+
     return (
         <div className="favorite">
             <img
-         onClick={() => history.push(`/character/${favorite.id}`)}
+         onClick={() => history.push(`/${path}/${favorite.id}`)}
             src={`${favorite?.thumbnail?.path}.${favorite?.thumbnail?.extension}`} alt={favorite?.name}/>
             <h2>{favorite.name}</h2>
             <IconButton

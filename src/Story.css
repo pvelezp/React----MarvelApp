@@ -1,10 +1,9 @@
 .story {
     
     margin: 0 auto;
-    box-shadow: 1px 0 4px 3px rgba(0,0,0,0.2);
+    box-shadow: 1px 0 4px 3px rgba(0,0,0,0.7);
     border-radius: 4px;
-   
-    background-color: gray;
+   margin-bottom: 2rem;
     padding: 2rem;
     width: 80%;
     
